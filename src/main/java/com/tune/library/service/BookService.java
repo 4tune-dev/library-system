@@ -45,6 +45,10 @@ public class BookService {
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
     }
 
+    public List<Book> findByAuthor(String author) {
+        return bookRepository.findByAuthor(author);
+    }
+
     public Book updateBook(Long id, BookDTO bookDTO) {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));

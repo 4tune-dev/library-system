@@ -49,6 +49,10 @@ public class BookService {
         return bookRepository.findByAuthor(author);
     }
 
+    public List<Book> findByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
+    }
+
     public Book updateBook(Long id, BookDTO bookDTO) {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));

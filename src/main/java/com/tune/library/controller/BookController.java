@@ -40,13 +40,13 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-by-author")
     public ResponseEntity<List<Book>> findBooksByAuthor(@RequestParam String author) {
         List<Book> books = bookService.findByAuthor(author);
         return ResponseEntity.ok(books);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search-by-title")
     public ResponseEntity<List<Book>> searchBooksByTitle(@RequestParam String title) {
         List<Book> books = bookService.findByTitle(title);
         return ResponseEntity.ok(books);
@@ -59,7 +59,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+    public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }

@@ -15,6 +15,11 @@ public class WebController {
 
     private final BookService bookService;
 
+    @GetMapping("/")
+    public String showDashboard() {
+        return "dashboard";
+    }
+
     @GetMapping("/books")
     public String showBooks(Model model) {
         model.addAttribute("books", bookService.getAllBooks());

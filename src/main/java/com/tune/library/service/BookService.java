@@ -67,6 +67,10 @@ public class BookService {
         return bookRepository.save(existingBook);
     }
 
+    public List<Book> searchBooksByTitleOrAuthor(String keyword) {
+        return bookRepository.findByTitleOrAuthorContainingIgnoreCase(keyword, keyword);
+    }
+
     public void deleteBook(Long id) {
         if (!bookRepository.existsById(id)) {
             throw new RuntimeException("Book not found with id: " + id);

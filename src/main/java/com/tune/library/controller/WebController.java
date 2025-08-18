@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -37,4 +38,16 @@ public class WebController {
         bookService.createBook(bookDTO);
         return "redirect:/books";
     }
+
+    @GetMapping("/books/search")
+    public String showSearchForm() {
+        return "search-book";
+    }
+
+    @PostMapping("/books/search")
+    public String processSearch(@RequestParam("keyword") String keyword, Model model) {
+        model.addAttribute("books", bookService.searchBooksByTitleOrAuthor(keyword));
+        return "books";
+    }
+
 }

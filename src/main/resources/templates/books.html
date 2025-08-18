@@ -42,6 +42,14 @@
                 <td th:text="${book.publisher}"></td>
                 <td th:text="${book.year}"></td>
                 <td th:text="${book.copiesAvailable}"></td>
+                <td>
+                    <!-- 🔹 Тут додаємо кнопку видалення -->
+                    <a th:href="@{'/books/delete/' + ${book.id}}"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure you want to delete this book?');">
+                        🗑️ Delete
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

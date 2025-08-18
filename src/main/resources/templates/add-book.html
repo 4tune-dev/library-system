@@ -1,16 +1,85 @@
+<!-- add-book.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head><title>Add Book</title></head>
-<body>
-<h1>Add New Book</h1>
-<form th:action="@{/books}" th:object="${bookDTO}" method="post">
-    <label>Title: <input th:field="*{title}" /></label><br/>
-    <label>ISBN: <input th:field="*{isbn}" /></label><br/>
-    <label>Publisher: <input th:field="*{publisher}" /></label><br/>
-    <label>Year: <input type="number" th:field="*{year}" /></label><br/>
-    <label>Copies: <input type="number" th:field="*{copiesAvailable}" /></label><br/>
-    <label>Author: <input th:field="*{author}" /></label><br/>
-    <button type="submit">Save</button>
-</form>
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Book</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>➕ Add New Book</h3>
+        </div>
+        <div class="card-body">
+
+            <form th:action="@{/books}" th:object="${bookDTO}" method="post" class="needs-validation" novalidate>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">📖 Title</label>
+                    <input type="text" id="title" th:field="*{title}" class="form-control" required>
+                    <div class="invalid-feedback">Please enter the book title.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="form-label">✍️ Author</label>
+                    <input type="text" id="author" th:field="*{author}" class="form-control" required>
+                    <div class="invalid-feedback">Please enter the author's name.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="isbn" class="form-label">🔖 ISBN</label>
+                    <input type="text" id="isbn" th:field="*{isbn}" class="form-control" required>
+                    <div class="invalid-feedback">Please provide a valid ISBN.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="publisher" class="form-label">🏢 Publisher</label>
+                    <input type="text" id="publisher" th:field="*{publisher}" class="form-control" required>
+                    <div class="invalid-feedback">Please provide the publisher.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="year" class="form-label">📅 Year</label>
+                    <input type="number" id="year" th:field="*{year}" class="form-control" min="1000" max="2100" required>
+                    <div class="invalid-feedback">Please enter a valid year.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="copiesAvailable" class="form-label">📚 Copies Available</label>
+                    <input type="number" id="copiesAvailable" th:field="*{copiesAvailable}" class="form-control" min="1" required>
+                    <div class="invalid-feedback">Enter at least 1 copy.</div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="/books" class="btn btn-secondary">⬅ Back</a>
+                    <button type="submit" class="btn btn-success">💾 Save Book</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap form validation script -->
+<script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+
 </body>
 </html>

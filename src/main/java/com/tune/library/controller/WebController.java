@@ -14,7 +14,7 @@ public class WebController {
 
     private final BookService bookService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/dashboard"})
     public String showDashboard() {
         return "dashboard";
     }

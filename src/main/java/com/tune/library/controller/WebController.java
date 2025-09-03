@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
 @Controller
@@ -48,8 +49,9 @@ public class WebController {
     }
 
     @GetMapping("/books/delete/{id}")
-    public String deleteBook(@PathVariable Long id) {
+    public String deleteBook(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         bookService.deleteBook(id);
+        redirectAttributes.addFlashAttribute("message", "✅ Book successfully deleted!");
         return "redirect:/books";
     }
 }
